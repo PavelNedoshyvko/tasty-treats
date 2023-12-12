@@ -1,11 +1,11 @@
 {
-  "name": "goit-js-team-project-1",
+  "name": "tasty-treats",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/goit-js-team-project-1/",
+    "build": "vite build --base=/tasty-treats/",
     "preview": "vite preview"
   },
   "devDependencies": {
