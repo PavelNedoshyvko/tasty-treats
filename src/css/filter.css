@@ -28,7 +28,6 @@
   .main-products-filter-label {
     font-size: 14px;
     line-height: 1.28;
-   
   }
 }
 
@@ -69,21 +68,45 @@
   }
 }
 
-.main-products-fiter-time-select {
+select::-webkit-scrollbar {
+  width: 8px;
+}
+
+select::-webkit-scrollbar-track {
+  background-color: var(--background-w);
+}
+
+select::-webkit-scrollbar-thumb {
+  background-color: var(--gray-border-w);
+  border-radius: 12px;
+}
+
+/* select::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+} */
+
+select option {
+  border-radius: 8px;
+  /* padding: 8px; */
+  /* background-color: #fff; */
+  /* color: #333; */
+}
+
+.main-products-filter-time-select {
   color: var(--gray-title-w);
   font-size: 14px;
   line-height: 1.28;
   padding: 14px 18px;
   background: var(--background-w);
   width: 158px;
-  height: 46px;
+  /* height: 46px; */
 
   border-radius: 15px;
   border: 1px solid var(--gray-border-w);
 }
 
 @media only screen and (min-width: 768px) {
-  .main-products-fiter-time-select {
+  .main-products-filter-time-select {
     font-size: 16px;
     line-height: 1.25;
 
@@ -93,7 +116,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .main-products-fiter-time-select {
+  .main-products-filter-time-select {
     width: 119px;
   }
 }

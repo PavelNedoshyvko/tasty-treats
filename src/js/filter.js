@@ -12,21 +12,21 @@ const AREA = '/areas';
 const ALL_INGREDIENTS = '/ingredients';
 
 async function fetchAllAreas() {
-  const { data } = await axios.get(`${AREA}`);
-  return data;
+	const { data } = await axios.get(`${AREA}`);
+	return data;
 }
 
-// function createMarkupTimeList() {
-// 	let timeList = [];
-// 	console.log(timeList);
-// 	for (let i = 5; i <= 160; i += 5){
-// 		timeList.push(`<option class="time-select">${i} min</option>`);
-// 	}
 
-//   refs.timeList.insertAdjacentHTML('beforeend', timeList.join(''));
-// }
+function createMarkupTimeList() {
+	let timeList = [];
+	for (let i = 5; i <= 120; i += 5) {
+		timeList.push(`<option class="time-select" value='${i}'>${i} min</option>`);
+	};
+	refs.timeList.insertAdjacentHTML('beforeend', timeList.join(''));
+}
 
-// createMarkupTimeList();
+
+createMarkupTimeList();
 
 // async function fetchAllIngredients() {
 //   const { data } = await axios.get(`${ALL_INGREDIENTS}`);
@@ -36,46 +36,46 @@ async function fetchAllAreas() {
 // area btn options
 
 async function areaList() {
-  try {
-    const results = await fetchAllAreas();
-    createMarkupAreasList(results);
-  } catch (err) {
-    console.log(err);
-  }
+	try {
+		const results = await fetchAllAreas();
+		createMarkupAreasList(results);
+	} catch (err) {
+		console.log(err);
+	}
 }
 
 areaList();
 
 function createMarkupAreasList(data) {
-  const optionsList = data
-    .map(({ id, name }) => `<option value="${id}">${name}</option>`)
-    .join(' ');
+	const optionsList = data
+		.map(({ id, name }) => `<option value="${id}">${name}</option>`)
+		.join(' ');
 
-  refs.areaList.innerHTML = optionsList;
+	refs.areaList.insertAdjacentHTML('beforeend', optionsList);
 }
 
 // All Ingredients Options ================================================
 
 async function ingridientsList() {
-  try {
-    const results = await fetchAllIngredients();
-    createMarkupIngridientsList(results);
-  } catch (err) {
-    console.log(err);
-  }
+	try {
+		const results = await fetchAllIngredients();
+		createMarkupIngridientsList(results);
+	} catch (err) {
+		console.log(err);
+	}
 }
 
 ingridientsList();
 
 function createMarkupIngridientsList(data) {
-  const optionsList = data
-    .map(
-      ({ id, name }) =>
-        `<option class="ingridients-select" value="${id}">${name}</option>`
-    )
-    .join(' ');
+	const optionsList = data
+		.map(
+			({ id, name }) =>
+				`<option class="ingridients-select" value="${id}">${name}</option>`
+		)
+		.join(' ');
 
-  refs.ingredientsList.insertAdjacentHTML('beforeend', optionsList);
+	refs.ingredientsList.insertAdjacentHTML('beforeend', optionsList);
 }
 
 // refs.ingredientsList.addEventListener('select', onSelect);
@@ -94,40 +94,40 @@ function createMarkupIngridientsList(data) {
 refs.areaList.addEventListener('change', onChangeAreaSelect);
 
 async function onChangeAreaSelect(evt) {
-  try {
-    let limit;
-    refs.mainList.innerHTML = '';
-    if (window.innerWidth < 768) {
-      limit = 6;
-    } else if (window.innerWidth < 1280) {
-      limit = 8;
-    } else {
-      limit = 9;
-    }
+	try {
+		let limit;
+		refs.mainList.innerHTML = '';
+		if (window.innerWidth < 768) {
+			limit = 6;
+		} else if (window.innerWidth < 1280) {
+			limit = 8;
+		} else {
+			limit = 9;
+		}
 
-    const searchQuery = evt.target.value;
+		const searchQuery = evt.target.value;
 
-    const data = await fetchAllRecipes();
-    const { results } = data;
-    results.map(recipe => {
-      const { title } = recipe;
-      const titleToLowerCase = title.toLowerCase();
-      const searchQueryToLowerCase = searchQuery.toLowerCase().trim();
-      if (titleToLowerCase.includes(searchQueryToLowerCase)) {
-        refs.mainList.insertAdjacentHTML(
-          'beforeend',
-          createMarkupRecipesByCategory(recipe)
-        );
+		const data = await fetchAllRecipes();
+		const { results } = data;
+		results.map(recipe => {
+			const { title } = recipe;
+			const titleToLowerCase = title.toLowerCase();
+			const searchQueryToLowerCase = searchQuery.toLowerCase().trim();
+			if (titleToLowerCase.includes(searchQueryToLowerCase)) {
+				refs.mainList.insertAdjacentHTML(
+					'beforeend',
+					createMarkupRecipesByCategory(recipe)
+				);
 
-        return;
-      }
-    });
+				return;
+			}
+		});
 
-    // const searchAreaSelect = evt.currentTarget.value;
-    // console.log(searchAreaSelect);
-  } catch (err) {
-    console.log(err);
-  }
+		// const searchAreaSelect = evt.currentTarget.value;
+		// console.log(searchAreaSelect);
+	} catch (err) {
+		console.log(err);
+	}
 }
 
 // export { onSearchInput };
